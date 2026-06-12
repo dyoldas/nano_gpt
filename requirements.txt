@@ -1,0 +1,11 @@
+torch
+numpy
+datasets
+tqdm
+pyyaml
+huggingface_hub
+transformers
+tokenizers
+jupyter
+ipykernel
+matplotlib

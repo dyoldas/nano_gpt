@@ -1,0 +1,35 @@
+# ============================================================
+# GPT instruction-finetuning config
+# ============================================================
+
+# Finetuning dataset folder inside data/
+dataset: instruct_mix
+
+# Model type
+model_type: gpt
+
+# Load pretrained weights from pretraining
+init_from: checkpoints/tiny_cosmo/ckpt.pt
+
+# Save finetuned checkpoint here
+out_dir: checkpoints/instruct_mix
+
+# Device
+device: auto
+
+# Reproducibility
+seed: 1337
+
+# Finetuning hyperparameters
+batch_size: 32
+block_size: 256
+max_iters: 2000
+eval_interval: 200
+eval_iters: 100
+learning_rate: 0.0001
+
+# Must match pretraining architecture exactly
+n_embd: 384
+n_head: 6
+n_layer: 6
+dropout: 0.2

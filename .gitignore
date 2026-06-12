@@ -1,0 +1,42 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment files
+.env
+.venv/
+venv/
+.envrc
+
+# macOS
+.DS_Store
+
+# Large generated dataset files
+*.bin
+*.pkl
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# Generated dataset text
+data/*/input.txt
+
+# Checkpoint outputs
+checkpoints/*
+
+# Generated samples
+samples/*
+
+# Logs
+*.log
+logs/
+
+# Local cache folders
+.cache/
+huggingface/

@@ -1,0 +1,36 @@
+# ============================================================
+# GPT pretraining config
+# ============================================================
+
+# Dataset folder inside data/
+dataset: tiny_cosmo
+
+# Model type
+model_type: gpt
+
+# Train from scratch
+init_from: null
+
+# Checkpoint output folder
+out_dir: checkpoints/tiny_cosmo
+
+# Device: "auto" should select MPS on your Mac
+device: auto
+
+# Reproducibility
+seed: 1337
+
+# Training hyperparameters
+batch_size: 64
+block_size: 256
+max_iters: 10000
+eval_interval: 500
+eval_iters: 100
+learning_rate: 0.0003
+
+# GPT architecture
+# Roughly 10M parameters
+n_embd: 384
+n_head: 6
+n_layer: 6
+dropout: 0.2

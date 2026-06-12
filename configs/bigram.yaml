@@ -1,0 +1,40 @@
+# ============================================================
+# Bigram baseline config
+# ============================================================
+
+# Dataset folder inside data/
+# This requires:
+#   data/tiny_cosmo/train.bin
+#   data/tiny_cosmo/val.bin
+#   data/tiny_cosmo/meta.pkl
+dataset: tiny_cosmo
+
+# Model type: "bigram" or "gpt"
+model_type: bigram
+
+# Train from scratch
+init_from: null
+
+# Checkpoint output folder
+out_dir: checkpoints/bigram
+
+# Device: "auto", "mps", "cuda", or "cpu"
+device: auto
+
+# Reproducibility
+seed: 1337
+
+# Training hyperparameters
+batch_size: 32
+block_size: 8
+max_iters: 3000
+eval_interval: 300
+eval_iters: 100
+learning_rate: 0.01
+
+# GPT-only fields.
+# Bigram does not use these, but keeping them avoids missing config keys.
+n_embd: 128
+n_head: 4
+n_layer: 4
+dropout: 0.0
