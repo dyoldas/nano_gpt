@@ -74,7 +74,8 @@ def sample_from_model(
 
         # Optional top-k filtering.
         # This prevents sampling from very unlikely tokens.
-        if top_k is not None:
+        # top_k <= 0 means disabled.
+        if top_k is not None and top_k > 0:
             top_k = min(top_k, logits.size(-1))
             values, _ = torch.topk(logits, top_k)
 
@@ -260,13 +261,35 @@ def main():
 
     text = decode(out_ids)
 
-    # By default, trim output at <|end|>.
-    # This works for our current character-level tokenizer because
-    # <|end|> is generated as normal characters.
-    end_marker = "<|end|>"
-    if end_marker in text:
-        # Keep everything up to and including the first <|end|>.
-        text = text.split(end_marker, 1)[0] + end_marker
+    # ------------------------------------------------------------
+    # Output cleanup
+    # ------------------------------------------------------------
+
+    # The model may continue past the answer and invent new fake turns like:
+    #
+    #     ### User:
+    #     ...
+    #
+    # or another instruction block.
+    #
+    # Since this is a character-level model, stop markers are normal text,
+    # not single special tokens. So we trim after decoding.
+    stop_markers = [
+        "<|end|>",
+        "\n### User:",
+        "\n### Instruction:",
+        "\n### System:",
+    ]
+
+    for marker in stop_markers:
+        if marker in text:
+            if marker == "<|end|>":
+                # Keep <|end|> if it appears.
+                text = text.split(marker, 1)[0] + marker
+            else:
+                # Remove fake next turn.
+                text = text.split(marker, 1)[0]
+            break
 
     print("\n" + "=" * 80)
     print(text)

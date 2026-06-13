@@ -9,3 +9,4 @@ tokenizers
 jupyter
 ipykernel
 matplotlib
+gradio
