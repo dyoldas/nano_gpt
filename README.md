@@ -58,23 +58,6 @@ nano_gpt/
 
 ---
 
-```text
-nano_gpt/
-├── app.py
-├── chat_engine.py
-├── generate.py
-├── train.py
-├── README.md
-├── requirements.txt
-├── configs/
-├── data/
-├── models/
-├── utils/
-├── checkpoints/
-├── samples/
-└── notebooks/
-```
-
 ## Local Desktop Chat Interface
 
 This project includes a minimal native desktop chat interface built with Tkinter.
