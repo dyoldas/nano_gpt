@@ -20,6 +20,8 @@ This project is mainly for understanding how language models work internally, no
 ```text
 nano_gpt/
 ├── README.md
+├── app.py
+├── chat_engine.py
 ├── train.py
 ├── generate.py
 ├── requirements.txt
@@ -53,6 +55,83 @@ nano_gpt/
 └── notebooks/
     └── walkthrough.ipynb
 ```
+
+---
+
+```text
+nano_gpt/
+├── app.py
+├── chat_engine.py
+├── generate.py
+├── train.py
+├── README.md
+├── requirements.txt
+├── configs/
+├── data/
+├── models/
+├── utils/
+├── checkpoints/
+├── samples/
+└── notebooks/
+```
+
+## Local Desktop Chat Interface
+
+This project includes a minimal native desktop chat interface built with Tkinter.
+
+The interface lets you interact with a trained checkpoint through a simple local window. It is not a real ChatGPT-scale assistant; it is a UI wrapper around the small character-level nanoGPT model.
+
+The desktop app uses:
+
+* `app.py` for the native Tkinter window
+* `chat_engine.py` for loading the model, formatting prompts, generating text, and cleaning responses
+* `generate.py`'s sampling function for autoregressive generation
+
+For instruction-finetuned checkpoints, the app formats user messages as:
+
+```text
+### Instruction:
+<user message>
+
+### Response:
+```
+
+This matches the instruction finetuning format used by the project.
+
+### Run the Desktop Chat App
+
+Use the finetuned checkpoint:
+
+```bash
+python app.py --ckpt checkpoints/instruct_mix/ckpt.pt
+```
+
+Use a specific device:
+
+```bash
+python app.py --ckpt checkpoints/instruct_mix/ckpt.pt --device mps
+```
+
+Use the pretrained checkpoint for raw story/text continuation:
+
+```bash
+python app.py --ckpt checkpoints/tiny_cosmo/ckpt.pt
+```
+
+***If Tkinter does not work try:***
+```bash
+conda install -c conda-forge tk
+```
+
+### Notes on Model Quality
+
+The chat interface only makes interaction easier. Expected behavior:
+
+* the pretrained model is better for raw text/story continuation
+* the finetuned model follows the instruction format better
+* the model may still repeat phrases or produce weak answers because it is small, character-level, and trained on limited/noisy data
+
+For best results, use short and simple prompts with conservative sampling settings.
 
 ---
 
